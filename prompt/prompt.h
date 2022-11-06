@@ -1,0 +1,2 @@
+// Function prototypes
+void displayPrompt();

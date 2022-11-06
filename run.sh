@@ -1,3 +1,3 @@
-gcc main.c -Wall && ./a.out << EOF
-# Test input
+gcc -Wall ./**/*.c -o af06109_LazyShell.out && ./af06109_LazyShell.out << EOF
+exit
 EOF
