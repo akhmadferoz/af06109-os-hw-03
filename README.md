@@ -8,10 +8,30 @@
 
 ## How To Run This Program
 
+### Method 1
+
 In order to compile the program, run the following command:
 
 ```
 gcc -Wall ./**/*.c -o LazyShell.out
 ```
 
-Once the program has been compiled, run `./LazyShell.out` to execute the compiled program.
+<!-- **Or**
+
+```
+bash compile.sh
+``` -->
+
+Once the program has been compiled, run the following command to execute the compiled program:
+
+```
+./LazyShell.out
+```
+
+<!-- ### Method 2
+
+Run the following command:
+
+```
+bash execute.sh
+``` -->
