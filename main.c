@@ -58,7 +58,11 @@ int main(int argc, char *argv[]) {
 
         int pid = fork();
 
-        if (pid == 0) {
+        if(pid == -1) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
+        else if (pid == 0) {
             execvp(command -> CommArray -> command, command -> CommArray -> VarList);
         } else {
             wait(NULL);
