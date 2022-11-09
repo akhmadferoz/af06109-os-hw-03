@@ -41,7 +41,14 @@ int main(int argc, char *argv[]) {
     while (1) {
         displayPrompt();
 
-        parseInfo *command = parse(readCommand());
+        char *rawCommand = readCommand();
+
+        // continue if command is empty
+        if (rawCommand == NULL || strcmp(rawCommand, "") == 0 || strcmp(rawCommand, "\n") == 0) {
+            continue;
+        }
+
+        parseInfo *command = parse(rawCommand);
         // print_info(command);
 
         if (strcmp(command -> CommArray -> command, "exit") == 0) {
