@@ -60,7 +60,11 @@ int main(int argc, char *argv[]) {
 
         if (strcmp(command -> CommArray -> command, "exit") == 0) {
             printf("!! Terminating shell...\n");
-            exit(0);
+            
+            free(rawCommand);
+            free_info(command);
+
+            exit(EXIT_SUCCESS);
         }
 
         int pid = fork();
