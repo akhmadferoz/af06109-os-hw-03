@@ -1,3 +1,8 @@
+/*
+ * References:
+ * IBM C/C++ Documentation: https://www.ibm.com/docs/en
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,12 +26,14 @@ char *readCommand(void)
     char *command = malloc(MAXLINE);
     if (command == NULL)
     {
+        fprintf(stderr, "ERROR: Unable to allocate memory for command.\n");
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
     if (fgets(command, MAXLINE, stdin) == NULL)
     {
+        fprintf(stderr, "ERROR: Unable to read command.\n");
         perror("fgets");
         exit(EXIT_FAILURE);
     }
@@ -52,20 +59,21 @@ int main(int argc, char *argv[]) {
         // print_info(command);
 
         if (strcmp(command -> CommArray -> command, "exit") == 0) {
-            printf("\n\n!! Terminating shell...\n\n");
+            printf("!! Terminating shell...\n");
             exit(0);
         }
 
         int pid = fork();
 
         if(pid == -1) {
+            fprintf(stderr, "ERROR: Unable to create fork");
             perror("fork");
             exit(EXIT_FAILURE);
         }
         else if (pid == 0) {
             execvp(command -> CommArray -> command, command -> CommArray -> VarList);
         } else {
-            wait(NULL);
+            wait(pid);
         }
 
     }
