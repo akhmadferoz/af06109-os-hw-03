@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
         else if (pid == 0) {
             execvp(command -> CommArray -> command, command -> CommArray -> VarList);
         } else {
-            wait(NULL);
+            waitpid(pid, NULL, 0);
         }
 
     }
