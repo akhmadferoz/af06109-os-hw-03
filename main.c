@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
         int pid = fork();
 
         if(pid == -1) {
-            fprintf(stderr, "ERROR: Unable to create fork");
+            fprintf(stderr, "ERROR: Unable to create fork\n");
             perror("fork");
             exit(EXIT_FAILURE);
         }
