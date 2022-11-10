@@ -45,6 +45,7 @@ char *readCommand(void)
 int main(int argc, char *argv[]) {
     initPrompt();
 
+
     while (1) {
         displayPrompt();
 
@@ -56,7 +57,12 @@ int main(int argc, char *argv[]) {
         }
 
         parseInfo *command = parse(rawCommand);
-        // print_info(command);
+        print_info(command);
+
+        // maintain a history of the last 10 commands
+        // if the user enters !!, the last command is executed
+        // if the user enters !n, the nth command is executed
+
 
         if (strcmp(command -> CommArray -> command, "exit") == 0) {
             printf("!! Terminating shell...\n");
@@ -65,6 +71,22 @@ int main(int argc, char *argv[]) {
             free_info(command);
 
             exit(EXIT_SUCCESS);
+        }
+
+        if (strcmp(command -> CommArray -> command, "help") == 0) {
+            printf("cd [dir_path] .......... change directory\n");
+            printf("help          .......... display help\n");
+
+            continue;
+        }
+
+        if (strcmp(command -> CommArray -> command, "cd") == 0) {
+            if (chdir(command -> CommArray -> VarList[1]) != 0) {
+                fprintf(stderr, "ERROR: Unable to change directory.\n");
+                perror("chdir");
+            }
+
+            continue;
         }
 
         int pid = fork();
@@ -79,6 +101,8 @@ int main(int argc, char *argv[]) {
         } else {
             waitpid(pid, NULL, 0);
         }
+
+        free(rawCommand);
 
     }
     
